@@ -1,0 +1,20 @@
+PATH
+  remote: .
+  specs:
+    stripe_presenter_plugin (0.0.1)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    rake (10.5.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bundler (~> 1.16)
+  rake (~> 10.0)
+  stripe_presenter_plugin!
+
+BUNDLED WITH
+   1.17.3
