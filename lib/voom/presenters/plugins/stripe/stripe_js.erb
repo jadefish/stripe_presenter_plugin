@@ -1,0 +1,36 @@
+<script src="https://js.stripe.com/v3/"></script>
+
+<script>
+    function createStripeBankAccountToken(_options, params, _event, results) {
+        var stripe = Stripe('pk_test_Gjth7sTrOVnCUlvQUtWmSVJ900d4XbnGCz');
+
+        var promise = new Promise(function (resolve, reject) {
+            stripe.createToken('bank_account', {
+                country: 'US',
+                currency: 'usd',
+                routing_number: '110000000',
+                account_number: '000123456789',
+                account_holder_name: 'Jenny Rosen',
+                account_holder_type: 'individual',
+            }).then(function(response) {
+                if (response.token) {
+                    var token = response.token;
+                    var result = {action: 'create_stripe_token', content: {token: token}, statusCode: 200};
+                    result.content = JSON.stringify(result.content);
+                    results.push(result);
+                    resolve(results);
+                } else {
+                    var message = response.error.replace(/_/g, ' ');
+                    var bad_result = {action: 'create_stripe_token', contentType: 'application/json', content: {errors: message}, statusCode: 400};
+                    bad_result.content = JSON.stringify(bad_result.content);
+                    results.push(bad_result);
+                    reject(results);
+                }
+            });
+        });
+
+        return promise;
+    }
+</script>
+
+
