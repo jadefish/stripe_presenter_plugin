@@ -2,16 +2,16 @@
 
 <script>
     function createStripeBankAccountToken(_options, params, _event, results) {
-        var stripe = Stripe('pk_test_Gjth7sTrOVnCUlvQUtWmSVJ900d4XbnGCz');
+        var stripe = Stripe(params.stripe_publishable_key);
 
         var promise = new Promise(function (resolve, reject) {
             stripe.createToken('bank_account', {
-                country: 'US',
-                currency: 'usd',
-                routing_number: '110000000',
-                account_number: '000123456789',
-                account_holder_name: 'Jenny Rosen',
-                account_holder_type: 'individual',
+                country: document.getElementById('stripe-bank-account-country').value,
+                currency: document.getElementById('stripe-bank-account-currency').value,
+                routing_number: document.getElementById('stripe-bank-account-routing-number').value,
+                account_number: document.getElementById('stripe-bank-account-account-number').value,
+                account_holder_name: document.getElementById('stripe-bank-account-holder-name').value,
+                account_holder_type: 'company',
             }).then(function(response) {
                 if (response.token) {
                     var token = response.token;
