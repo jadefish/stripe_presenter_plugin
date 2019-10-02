@@ -21,7 +21,7 @@ function createStripeBankAccountToken(_options, params, _event, results) {
                 results.push(result);
                 resolve(results);
             } else {
-                var message = response.error.replace(/_/g, ' ');
+                var message = response.error.message;
                 var bad_result = {action: 'create_stripe_bank_account_token', contentType: 'application/json', content: {errors: message}, statusCode: 400};
                 bad_result.content = JSON.stringify(bad_result.content);
                 results.push(bad_result);
