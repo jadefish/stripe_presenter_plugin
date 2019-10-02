@@ -39,7 +39,7 @@ module Voom
 
             button text: "Submit", id: 'stripe-bank-account-form-submit', name: 'stripe_bank_account_form_submit' do
               event :click do
-                create_stripe_token stripe_publishable_key: stripe_publishable_key
+                create_stripe_bank_account_token stripe_publishable_key: stripe_publishable_key
                 posts url, onetime_token: last_response.token
                 yield_to(&block)
               end
@@ -48,8 +48,8 @@ module Voom
         end
 
         module DSLEventActions
-          def create_stripe_token(**attributes, &block)
-            self << Stripe::CreateStripeToken.new(parent: self, **attributes, &block)
+          def create_stripe_bank_account_token(**attributes, &block)
+            self << Stripe::CreateStripeBankAccountToken.new(parent: self, **attributes, &block)
           end
         end
 
@@ -66,9 +66,9 @@ module Voom
         end
 
         module WebClientActions
-          def action_data_create_stripe_token(action, _parent_id, *)
+          def action_data_create_stripe_bank_account_token(action, _parent_id, *)
             # Type, URL, Options, Params (passed into javascript event/action classes)
-            ['createStripeToken', action.url, action.options.to_h, action.attributes.to_h]
+            ['createStripeBankAccountToken', action.url, action.options.to_h, action.attributes.to_h]
           end
         end
       end

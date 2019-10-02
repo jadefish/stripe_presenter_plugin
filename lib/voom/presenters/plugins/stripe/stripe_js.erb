@@ -5,6 +5,7 @@
         var stripe = Stripe(params.stripe_publishable_key);
 
         var promise = new Promise(function (resolve, reject) {
+            console.log('creating token');
             stripe.createToken('bank_account', {
                 country: document.getElementById('stripe-bank-account-country').value,
                 currency: document.getElementById('stripe-bank-account-currency').value,
