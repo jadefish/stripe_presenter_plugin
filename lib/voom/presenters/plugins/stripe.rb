@@ -1,5 +1,5 @@
 require_relative 'stripe/stripe_js_component'
-require_relative 'stripe/create_stripe_token'
+require_relative 'stripe/create_stripe_bank_account_token'
 
 module Voom
   module Presenters
