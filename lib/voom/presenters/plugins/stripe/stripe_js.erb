@@ -5,13 +5,12 @@ function createStripeBankAccountToken(_options, params, _event, results) {
     var stripe = Stripe(params.stripe_publishable_key);
 
     var promise = new Promise(function (resolve, reject) {
-        console.log('creating token');
         stripe.createToken('bank_account', {
             country: document.getElementById('stripe-bank-account-country').value,
             currency: document.getElementById('stripe-bank-account-currency').value,
-            routing_number: document.getElementById('stripe-bank-account-routing-number').value,
-            account_number: document.getElementById('stripe-bank-account-number').value,
-            account_holder_name: document.getElementById('stripe-bank-account-holder-name').value,
+            routing_number: document.getElementById('stripe-bank-account-routing-number-input').value,
+            account_number: document.getElementById('stripe-bank-account-number-input').value,
+            account_holder_name: document.getElementById('stripe-bank-account-holder-name-input').value,
             account_holder_type: 'company',
         }).then(function(response) {
             if (response.token) {
