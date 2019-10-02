@@ -12,12 +12,14 @@ module Voom
 
           def stripe_bank_account_form(url:, stripe_publishable_key:, prefill_data: {}, **attributes, &block)
             select id: 'stripe-bank-account-country', name: 'country' do
+              label "Country"
               option do
                 value 'US'
-                text 'US'
+                text 'United States'
               end
             end
             select id: 'stripe-bank-account-currency', name: 'currency' do
+              label "Currency"
               option do
                 value 'usd'
                 text 'USD'
