@@ -1,37 +1,37 @@
 <script src="https://js.stripe.com/v3/"></script>
 
 <script>
-    function createStripeBankAccountToken(_options, params, _event, results) {
-        var stripe = Stripe(params.stripe_publishable_key);
+function createStripeBankAccountToken(_options, params, _event, results) {
+    var stripe = Stripe(params.stripe_publishable_key);
 
-        var promise = new Promise(function (resolve, reject) {
-            console.log('creating token');
-            stripe.createToken('bank_account', {
-                country: document.getElementById('stripe-bank-account-country').value,
-                currency: document.getElementById('stripe-bank-account-currency').value,
-                routing_number: document.getElementById('stripe-bank-account-routing-number').value,
-                account_number: document.getElementById('stripe-bank-account-account-number').value,
-                account_holder_name: document.getElementById('stripe-bank-account-holder-name').value,
-                account_holder_type: 'company',
-            }).then(function(response) {
-                if (response.token) {
-                    var token = response.token;
-                    var result = {action: 'create_stripe_token', content: {token: token}, statusCode: 200};
-                    result.content = JSON.stringify(result.content);
-                    results.push(result);
-                    resolve(results);
-                } else {
-                    var message = response.error.replace(/_/g, ' ');
-                    var bad_result = {action: 'create_stripe_token', contentType: 'application/json', content: {errors: message}, statusCode: 400};
-                    bad_result.content = JSON.stringify(bad_result.content);
-                    results.push(bad_result);
-                    reject(results);
-                }
-            });
+    var promise = new Promise(function (resolve, reject) {
+        console.log('creating token');
+        stripe.createToken('bank_account', {
+            country: document.getElementById('stripe-bank-account-country').value,
+            currency: document.getElementById('stripe-bank-account-currency').value,
+            routing_number: document.getElementById('stripe-bank-account-routing-number').value,
+            account_number: document.getElementById('stripe-bank-account-number').value,
+            account_holder_name: document.getElementById('stripe-bank-account-holder-name').value,
+            account_holder_type: 'company',
+        }).then(function(response) {
+            if (response.token) {
+                var token = response.token;
+                var result = {action: 'create_stripe_bank_account_token', content: {token: token}, statusCode: 200};
+                result.content = JSON.stringify(result.content);
+                results.push(result);
+                resolve(results);
+            } else {
+                var message = response.error.replace(/_/g, ' ');
+                var bad_result = {action: 'create_stripe_bank_account_token', contentType: 'application/json', content: {errors: message}, statusCode: 400};
+                bad_result.content = JSON.stringify(bad_result.content);
+                results.push(bad_result);
+                reject(results);
+            }
         });
+    });
 
-        return promise;
-    }
+    return promise;
+}
 </script>
 
 
