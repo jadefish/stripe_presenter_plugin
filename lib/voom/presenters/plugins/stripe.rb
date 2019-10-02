@@ -40,7 +40,7 @@ module Voom
             button text: "Submit", id: 'stripe-bank-account-form-submit', name: 'stripe_bank_account_form_submit' do
               event :click do
                 create_stripe_bank_account_token stripe_publishable_key: stripe_publishable_key
-                posts url, onetime_token: last_response.token, **attributes[:extra_post_data]
+                posts url, onetime_token: last_response.token, input_tag: :none, **attributes[:extra_post_data]
                 yield_to(&block)
               end
             end
