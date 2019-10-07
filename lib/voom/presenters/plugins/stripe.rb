@@ -11,33 +11,33 @@ module Voom
           end
 
           def stripe_bank_account_form(url:, stripe_publishable_key:, prefill_data: {}, **attributes, &block)
-            select id: 'stripe-bank-account-country', name: 'country' do
+            select id: 'stripe-bank-account-country', name: :country do
               label "Country"
               option do
                 value 'US'
                 text 'United States'
               end
             end
-            select id: 'stripe-bank-account-currency', name: 'currency' do
+            select id: 'stripe-bank-account-currency', name: :currency do
               label "Currency"
               option do
                 value 'usd'
                 text 'USD'
               end
             end
-            text_field id: 'stripe-bank-account-holder-name', name: 'account_holder_name', auto_complete: false do
+            text_field id: 'stripe-bank-account-holder-name', name: :account_holder_name, auto_complete: false do
               label "Name on Account"
               value prefill_data[:account_holder_name] if prefill_data[:account_holder_name]
             end
-            text_field id: 'stripe-bank-account-routing-number', name: 'routing_number', auto_complete: false do
+            text_field id: 'stripe-bank-account-routing-number', name: :routing_number, auto_complete: false do
               label "Routing Number"
               value prefill_data[:routing_number] if prefill_data[:routing_number]
             end
-            text_field id: 'stripe-bank-account-number', name: 'account_number', auto_complete: false do
+            text_field id: 'stripe-bank-account-number', name: :account_number, auto_complete: false do
               label "Account Number"
             end
 
-            button text: "Submit", id: 'stripe-bank-account-form-submit', name: 'stripe_bank_account_form_submit' do
+            button text: "Submit", id: 'stripe-bank-account-form-submit', name: :stripe_bank_account_form_submit do
               event :click do
                 create_stripe_bank_account_token stripe_publishable_key: stripe_publishable_key
                 posts url, onetime_token: last_response.token, input_tag: :none, **attributes[:extra_post_data]
