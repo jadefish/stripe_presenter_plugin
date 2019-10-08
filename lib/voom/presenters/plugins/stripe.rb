@@ -10,7 +10,7 @@ module Voom
             self << Stripe::StripeJsComponent.new(parent: self, **attributes, &block)
           end
 
-          def stripe_bank_account_form(url:, stripe_publishable_key:, prefill_data: {}, **attributes, &block)
+          def stripe_bank_account_form_fields(prefill_data: {}, **attributes, &block)
             select id: 'stripe-bank-account-country', name: :country do
               label "Country"
               option do
@@ -36,7 +36,9 @@ module Voom
             text_field id: 'stripe-bank-account-number', name: :account_number, auto_complete: false do
               label "Account Number"
             end
+          end
 
+          def stripe_bank_account_form_button(url:, stripe_publishable_key:, **attributes, &block)
             button text: "Submit", id: 'stripe-bank-account-form-submit', name: :stripe_bank_account_form_submit do
               event :click do
                 create_stripe_bank_account_token stripe_publishable_key: stripe_publishable_key
