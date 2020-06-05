@@ -1,0 +1,24 @@
+<div id="<%= comp.id %>"
+     class="v-plugin v-input v-stripe_credit_card_form form-row"
+     data-plugin-callback='StripeCreditCardForm'
+     data-stripe-publishable-key="<%= comp.stripe_publishable_key %>"
+     data-client-secret="<%= comp.client_secret %>"
+     data-payment-intent-id="<%= comp.payment_intent_id %>"
+>
+  <!-- Form for testing -->
+  <form id="payment-form">
+    <div class="sr-combo-inputs-row">
+      <div class="sr-input sr-card-element" id="card-element">
+        <!-- A Stripe Element will be inserted here. -->
+      </div>
+    </div>
+    <div class="sr-field-error" id="card-errors" role="alert"></div>
+  <!--  <div class="spinner hidden" id="spinner"></div>-->
+    <!-- Button for testing -->
+    <button id="submit">
+      <div class="spinner hidden" id="spinner"></div>
+      <span id="button-text">Pay</span><span id="order-amount"></span>
+    </button>
+    <!-- / -->
+  </form>
+</div>

@@ -1,5 +1,6 @@
-require_relative 'stripe/stripe_js_component'
-require_relative 'stripe/create_stripe_bank_account_token'
+require_relative 'stripe/components/stripe_js'
+require_relative 'stripe/components/credit_card_form'
+require_relative 'stripe/components/actions/create_stripe_bank_account_token'
 
 module Voom
   module Presenters
@@ -7,7 +8,7 @@ module Voom
       module Stripe
         module DSLComponents
           def stripe_js(**attributes, &block)
-            self << Stripe::StripeJsComponent.new(parent: self, **attributes, &block)
+            self << Stripe::Components::StripeJs.new(parent: self, **attributes, &block)
           end
 
           def stripe_bank_account_form_fields(prefill_data: {}, **attributes, &block)
@@ -47,24 +48,51 @@ module Voom
               end
             end
           end
+
+          def stripe_credit_card_form(stripe_publishable_key:, client_secret:, payment_intent_id:, **attributes, &block)
+            self << Stripe::Components::CreditCardForm.new(stripe_publishable_key,
+                                                           client_secret,
+                                                           payment_intent_id,
+                                                           parent: self, **attributes, &block)
+          end
+
+          # def stripe_credit_card_form_button(text = 'Pay Now', stripe_publishable_key:, **attributes, &block)
+          #
+          # end
         end
 
         module DSLEventActions
           def create_stripe_bank_account_token(**attributes, &block)
-            self << Stripe::CreateStripeBankAccountToken.new(parent: self, **attributes, &block)
+            self << Stripe::Components::Actions::CreateStripeBankAccountToken.new(parent: self, **attributes, &block)
           end
         end
 
         module WebClientComponents
+          VIEW_DIR = File.join(__dir__, 'stripe/views')
+
           def render_stripe_js(comp,
                              render:,
                              components:,
                              index:)
-            view_dir = File.join(__dir__, 'stripe')
-            render.call :erb, :stripe_js, views: view_dir,
+            render.call :erb, :stripe_js, views: VIEW_DIR,
                         locals: {comp: comp,
                                  components: components, index: index}
           end
+
+          def render_header_stripe_credit_card_form(_pom, render:)
+            render.call :erb, :header, views: VIEW_DIR
+          end
+
+          def render_stripe_credit_card_form(comp,
+                                             render:,
+                                             components:,
+                                             index:)
+            render.call :erb, :credit_card_form, views: VIEW_DIR,
+                        locals: {comp: comp,
+                                 components: components,
+                                 index: index}
+          end
+
         end
 
         module WebClientActions
