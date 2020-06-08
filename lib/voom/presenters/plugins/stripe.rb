@@ -79,8 +79,9 @@ module Voom
                                  components: components, index: index}
           end
 
-          def render_header_stripe_credit_card_form(_pom, render:)
-            render.call :erb, :header, views: VIEW_DIR
+          def render_header_stripe(_pom, render:)
+            view_dir = File.join(__dir__, 'stripe/views')
+            render.call :erb, :header, views: view_dir
           end
 
           def render_stripe_credit_card_form(comp,

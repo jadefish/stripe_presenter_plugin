@@ -1,24 +1,29 @@
 <div id="<%= comp.id %>"
-     class="v-plugin v-input v-stripe_credit_card_form form-row"
+     class="v-plugin v-input v-stripe_credit_card_form"
      data-plugin-callback='StripeCreditCardForm'
      data-stripe-publishable-key="<%= comp.stripe_publishable_key %>"
      data-client-secret="<%= comp.client_secret %>"
      data-payment-intent-id="<%= comp.payment_intent_id %>"
 >
-  <!-- Form for testing -->
-  <form id="payment-form">
-    <div class="sr-combo-inputs-row">
-      <div class="sr-input sr-card-element" id="card-element">
-        <!-- A Stripe Element will be inserted here. -->
+    <div class="sr-payment-form">
+      <div class="sr-combo-inputs-row">
+  <!--      v-input v-text-field-no-js v-focusable mdc-text-field mdc-text-field--outlined-->
+        <div class="sr-input sr-card-element"  id="card-element">
+          <!-- A Stripe Element will be inserted here. -->
+        </div>
       </div>
-    </div>
-    <div class="sr-field-error" id="card-errors" role="alert"></div>
-  <!--  <div class="spinner hidden" id="spinner"></div>-->
-    <!-- Button for testing -->
-    <button id="submit">
+      <div class="sr-field-error" id="card-errors" role="alert"></div>
       <div class="spinner hidden" id="spinner"></div>
-      <span id="button-text">Pay</span><span id="order-amount"></span>
-    </button>
+      <!-- Validation button for testing -->
+      <button id="validate" class="v-button v-button--button mdc-button mdc-button--raised mdc-ripple-upgraded--unbounded mdc-ripple-upgraded">
+        <span id="button-text">Validate Card</span>
+      </button>
+    </div>
+    <div class="sr-result hidden">
+      <p>Payment completed<br /></p>
+      <pre>
+        <code></code>
+      </pre>
+    </div>
     <!-- / -->
-  </form>
 </div>
