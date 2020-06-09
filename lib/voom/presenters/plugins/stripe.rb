@@ -55,10 +55,6 @@ module Voom
                                                            payment_intent_id,
                                                            parent: self, **attributes, &block)
           end
-
-          # def stripe_credit_card_form_button(text = 'Pay Now', stripe_publishable_key:, **attributes, &block)
-          #
-          # end
         end
 
         module DSLEventActions
