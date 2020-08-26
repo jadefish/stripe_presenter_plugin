@@ -7,14 +7,10 @@ module Voom
         module Components
           class CreditCardForm < DSL::Components::EventBase
 
-            attr_reader :stripe_publishable_key, :client_secret, :payment_intent_id, :tag, :submit_id
+            attr_reader :stripe_publishable_key
 
-            def initialize(stripe_publishable_key, client_secret, payment_intent_id, **attribs, &block)
+            def initialize(stripe_publishable_key, **attribs, &block)
               @stripe_publishable_key = stripe_publishable_key
-              @client_secret = client_secret
-              @payment_intent_id = payment_intent_id
-              @submit_id = attribs.delete(:submit_id) { 'validate-card' }
-              @tag = attribs.delete(:tag) { nil }
               super(type: :stripe_credit_card_form, **attribs, &block)
               expand!
             end

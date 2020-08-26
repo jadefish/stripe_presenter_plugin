@@ -2,10 +2,6 @@
      class="v-plugin v-input v-stripe_credit_card_form"
      data-plugin-callback='StripeCreditCardForm'
      data-stripe-publishable-key="<%= comp.stripe_publishable_key %>"
-     data-client-secret="<%= comp.client_secret %>"
-     data-payment-intent-id="<%= comp.payment_intent_id %>"
-     data-submit-id="<%= comp.submit_id %>"
-     <% if comp.tag %>data-input-tag="<%= comp.tag %>"<% end %>
 >
     <div class="sr-payment-form">
       <div class="sr-combo-inputs-row">
@@ -13,7 +9,6 @@
           <!-- A Stripe Element will be inserted here. -->
         </div>
       </div>
-      <input type="hidden" name="payment_intent_token" value="<%= comp.client_secret %>" />
       <div class="sr-field-error" id="card-errors" role="alert"></div>
       <div class="spinner hidden" id="spinner"></div>
       <% if comp.submit_id == 'validate-card'%>

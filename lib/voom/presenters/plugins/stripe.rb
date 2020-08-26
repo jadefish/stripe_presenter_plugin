@@ -1,6 +1,7 @@
 require_relative 'stripe/components/stripe_js'
 require_relative 'stripe/components/credit_card_form'
 require_relative 'stripe/components/actions/create_stripe_bank_account_token'
+require_relative 'stripe/components/actions/tokenize_credit_card'
 
 module Voom
   module Presenters
@@ -49,17 +50,18 @@ module Voom
             end
           end
 
-          def stripe_credit_card_form(stripe_publishable_key:, client_secret:, payment_intent_id:, **attributes, &block)
-            self << Stripe::Components::CreditCardForm.new(stripe_publishable_key,
-                                                           client_secret,
-                                                           payment_intent_id,
-                                                           parent: self, **attributes, &block)
+          def stripe_credit_card_form(stripe_publishable_key:, **attributes, &block)
+            self << Stripe::Components::CreditCardForm.new(stripe_publishable_key,parent: self, **attributes, &block)
           end
         end
 
         module DSLEventActions
           def create_stripe_bank_account_token(**attributes, &block)
             self << Stripe::Components::Actions::CreateStripeBankAccountToken.new(parent: self, **attributes, &block)
+          end
+
+          def tokenize_credit_card(**attributes, &block)
+            self << Stripe::Components::Actions::TokenizeCreditCard.new(parent: self, **attributes, &block)
           end
         end
 
@@ -96,6 +98,11 @@ module Voom
           def action_data_create_stripe_bank_account_token(action, _parent_id, *)
             # Type, URL, Options, Params (passed into javascript event/action classes)
             ['createStripeBankAccountToken', action.url, action.options.to_h, action.attributes.to_h]
+          end
+
+          def action_data_tokenize_credit_card(action, _parent_id, *)
+            # Type, URL, Options, Params (passed into javascript event/action classes)
+            ['tokenizeCreditCard', action.url, action.options.to_h, action.attributes.to_h]
           end
         end
       end
