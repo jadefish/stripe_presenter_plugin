@@ -13,7 +13,7 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 1.16)
-  rake (~> 12.3.3)
+  rake (>= 12.3.3)
   stripe_presenter_plugin!
 
 BUNDLED WITH
