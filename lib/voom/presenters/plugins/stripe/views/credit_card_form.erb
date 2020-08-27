@@ -2,6 +2,8 @@
      class="v-plugin v-input v-stripe_credit_card_form"
      data-plugin-callback='StripeCreditCardForm'
      data-stripe-publishable-key="<%= comp.stripe_publishable_key %>"
+     data-currency="<%= comp.currency %>"
+     <% if comp.address_config %>data-address-config=<%= comp.address_config.to_json %><% end %>
 >
     <div class="sr-payment-form">
       <div class="sr-combo-inputs-row">
@@ -11,11 +13,6 @@
       </div>
       <div class="sr-field-error" id="card-errors" role="alert"></div>
       <div class="spinner hidden" id="spinner"></div>
-      <% if comp.submit_id == 'validate-card'%>
-        <button id="validate-card" class="v-button v-button--button mdc-button mdc-button--raised mdc-ripple-upgraded--unbounded mdc-ripple-upgraded">
-          <span id="button-text">Validate Card</span>
-        </button>
-      <% end %>
     </div>
     <div class="sr-result hidden">
       <p>Payment completed<br /></p>

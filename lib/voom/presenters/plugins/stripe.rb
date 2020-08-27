@@ -13,29 +13,29 @@ module Voom
           end
 
           def stripe_bank_account_form_fields(prefill_data: {}, **attributes, &block)
-            select id: 'stripe-bank-account-country', name: :country do
+            select name: :country do
               label "Country"
               option do
                 value 'US'
                 text 'United States'
               end
             end
-            select id: 'stripe-bank-account-currency', name: :currency do
+            select name: :currency do
               label "Currency"
               option do
                 value 'usd'
                 text 'USD'
               end
             end
-            text_field id: 'stripe-bank-account-holder-name', name: :account_holder_name, auto_complete: false do
+            text_field name: :account_holder_name, auto_complete: false do
               label "Name on Account"
               value prefill_data[:account_holder_name] if prefill_data[:account_holder_name]
             end
-            text_field id: 'stripe-bank-account-routing-number', name: :routing_number, auto_complete: false do
+            text_field name: :routing_number, auto_complete: false do
               label "Routing Number"
               value prefill_data[:routing_number] if prefill_data[:routing_number]
             end
-            text_field id: 'stripe-bank-account-number', name: :account_number, auto_complete: false do
+            text_field name: :account_number, auto_complete: false do
               label "Account Number"
             end
           end
@@ -101,8 +101,7 @@ module Voom
           end
 
           def action_data_tokenize_credit_card(action, _parent_id, *)
-            # Type, URL, Options, Params (passed into javascript event/action classes)
-            ['tokenizeCreditCard', action.url, action.options.to_h, action.attributes.to_h]
+            ['tokenizeCreditCard', nil, action.options.to_h, {}]
           end
         end
       end
