@@ -3,9 +3,9 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = "stripe_presenter_plugin"
-  spec.version       = '1.0.0'
-  spec.authors       = ["Tyler Lemburg"]
-  spec.email         = ["trlemburg@gmail.com"]
+  spec.version       = '1.1.0'
+  spec.authors       = ["Tyler Lemburg", "Derek Graham"]
+  spec.email         = ["trlemburg@gmail.com", "derek@evvnt.com"]
 
   spec.summary       = "A plugin to add Stripe.js functionality to presenters"
   spec.homepage      = 'http://github.com/mynorth/stripe_presenters_plugin'
