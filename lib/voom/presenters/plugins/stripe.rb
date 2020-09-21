@@ -1,5 +1,7 @@
-require_relative 'stripe/stripe_js_component'
-require_relative 'stripe/create_stripe_bank_account_token'
+require_relative 'stripe/components/stripe_js'
+require_relative 'stripe/components/credit_card_form'
+require_relative 'stripe/components/actions/create_stripe_bank_account_token'
+require_relative 'stripe/components/actions/tokenize_credit_card'
 
 module Voom
   module Presenters
@@ -7,33 +9,33 @@ module Voom
       module Stripe
         module DSLComponents
           def stripe_js(**attributes, &block)
-            self << Stripe::StripeJsComponent.new(parent: self, **attributes, &block)
+            self << Stripe::Components::StripeJs.new(parent: self, **attributes, &block)
           end
 
           def stripe_bank_account_form_fields(prefill_data: {}, **attributes, &block)
-            select id: 'stripe-bank-account-country', name: :country do
+            select name: :country do
               label "Country"
               option do
                 value 'US'
                 text 'United States'
               end
             end
-            select id: 'stripe-bank-account-currency', name: :currency do
+            select name: :currency do
               label "Currency"
               option do
                 value 'usd'
                 text 'USD'
               end
             end
-            text_field id: 'stripe-bank-account-holder-name', name: :account_holder_name, auto_complete: false do
+            text_field name: :account_holder_name, auto_complete: false do
               label "Name on Account"
               value prefill_data[:account_holder_name] if prefill_data[:account_holder_name]
             end
-            text_field id: 'stripe-bank-account-routing-number', name: :routing_number, auto_complete: false do
+            text_field name: :routing_number, auto_complete: false do
               label "Routing Number"
               value prefill_data[:routing_number] if prefill_data[:routing_number]
             end
-            text_field id: 'stripe-bank-account-number', name: :account_number, auto_complete: false do
+            text_field name: :account_number, auto_complete: false do
               label "Account Number"
             end
           end
@@ -47,30 +49,59 @@ module Voom
               end
             end
           end
+
+          def stripe_credit_card_form(stripe_publishable_key:, **attributes, &block)
+            self << Stripe::Components::CreditCardForm.new(stripe_publishable_key,parent: self, **attributes, &block)
+          end
         end
 
         module DSLEventActions
           def create_stripe_bank_account_token(**attributes, &block)
-            self << Stripe::CreateStripeBankAccountToken.new(parent: self, **attributes, &block)
+            self << Stripe::Components::Actions::CreateStripeBankAccountToken.new(parent: self, **attributes, &block)
+          end
+
+          def tokenize_credit_card(**attributes, &block)
+            self << Stripe::Components::Actions::TokenizeCreditCard.new(parent: self, **attributes, &block)
           end
         end
 
         module WebClientComponents
+          VIEW_DIR = File.join(__dir__, 'stripe/views')
+
           def render_stripe_js(comp,
                              render:,
                              components:,
                              index:)
-            view_dir = File.join(__dir__, 'stripe')
-            render.call :erb, :stripe_js, views: view_dir,
+            render.call :erb, :stripe_js, views: VIEW_DIR,
                         locals: {comp: comp,
                                  components: components, index: index}
           end
+
+          def render_header_stripe(_pom, render:)
+            view_dir = File.join(__dir__, 'stripe/views')
+            render.call :erb, :header, views: view_dir
+          end
+
+          def render_stripe_credit_card_form(comp,
+                                             render:,
+                                             components:,
+                                             index:)
+            render.call :erb, :credit_card_form, views: VIEW_DIR,
+                        locals: {comp: comp,
+                                 components: components,
+                                 index: index}
+          end
+
         end
 
         module WebClientActions
           def action_data_create_stripe_bank_account_token(action, _parent_id, *)
             # Type, URL, Options, Params (passed into javascript event/action classes)
             ['createStripeBankAccountToken', action.url, action.options.to_h, action.attributes.to_h]
+          end
+
+          def action_data_tokenize_credit_card(action, _parent_id, *)
+            ['tokenizeCreditCard', nil, action.options.to_h, {}]
           end
         end
       end
