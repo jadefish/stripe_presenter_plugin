@@ -3,7 +3,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = "stripe_presenter_plugin"
-  spec.version       = '1.1.1'
+  spec.version       = '1.2.0'
   spec.authors       = ["Tyler Lemburg", "Derek Graham"]
   spec.email         = ["trlemburg@gmail.com", "derek@evvnt.com"]
 
