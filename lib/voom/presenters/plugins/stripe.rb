@@ -89,6 +89,7 @@ module Voom
             render.call :erb, :credit_card_form, views: VIEW_DIR,
                         locals: {comp: comp,
                                  components: components,
+                                 view_dir: VIEW_DIR,
                                  index: index}
           end
 
