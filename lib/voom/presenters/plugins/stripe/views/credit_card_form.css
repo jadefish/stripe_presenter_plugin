@@ -5,6 +5,14 @@
 }
 
 /* Multi-line component styles */
+.v-stripe_credit_card_form_single_line {
+    max-width: 500px;
+}
+
+.v-stripe_credit_card_form_single_line #card-errors {
+    color: #DC1F3C;
+}
+
 /* Variables */
 :root {
     --body-color: #E8EAF6;

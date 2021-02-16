@@ -13,7 +13,7 @@ module Voom
               @stripe_publishable_key = stripe_publishable_key
               @address_config = attribs.delete(:address_config){ {} }
               @currency = attribs.delete(:currency){ 'usd' }
-              @form_type = attribs.delete(:form_type){ 'multi_line' }
+              @form_type = attribs.delete(:form_type){ 'multi_line' }.to_s
               super(type: :stripe_credit_card_form, **attribs, &block)
               expand!
             end
