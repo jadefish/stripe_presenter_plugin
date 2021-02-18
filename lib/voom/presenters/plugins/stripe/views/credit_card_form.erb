@@ -1,55 +1,14 @@
 <div id="<%= comp.id %>"
-     class="v-plugin v-input v-stripe_credit_card_form"
+     class="v-plugin v-input v-stripe_credit_card_form v-stripe_credit_card_form_<%= comp.form_type %>"
      data-plugin-callback='StripeCreditCardForm'
      data-stripe-publishable-key="<%= comp.stripe_publishable_key %>"
+     data-form-type="<%= comp.form_type %>"
      data-currency="<%= comp.currency %>"
      <% if comp.address_config %>data-address-config=<%= comp.address_config.to_json %><% end %>
 >
-
-    <div class="sr-payment-form v-grid mdc-layout-grid v-padding-bottom0-left0-right0-top0 v-component v-container">
-      <div class="mdc-layout-grid__inner">
-
-        <div class="v-column mdc-layout-grid__cell mdc-layout-grid__cell--span-6 v-padding- v-column--relative v-grid-column-align-left v-component v-container">
-          <div class="v-focusable mdc-text-field mdc-text-field--outlined" style="width: 100%;">
-            <div id="card-number" class="input empty v-stripe-element"></div>
-            <div class="mdc-notched-outline mdc-notched-outline--upgraded mdc-notched-outline--notched">
-              <div class="mdc-notched-outline__leading"></div>
-              <div class="mdc-notched-outline__notch">
-                <label for="card-number" class="mdc-floating-label mdc-floating-label--float-above" style="">Card Number</label>
-              </div>
-              <div class="mdc-notched-outline__trailing"></div>
-            </div>
-
-          </div>
-        </div>
-
-        <div class="v-column mdc-layout-grid__cell mdc-layout-grid__cell--span-3 v-padding- v-column--relative v-grid-column-align-left v-component v-container">
-          <div class="v-focusable mdc-text-field mdc-text-field--outlined" style="width: 100%;">
-            <div id="card-expiry" class="input empty  v-stripe-element"></div>
-            <div class="mdc-notched-outline mdc-notched-outline--upgraded mdc-notched-outline--notched">
-              <div class="mdc-notched-outline__leading"></div>
-              <div class="mdc-notched-outline__notch">
-                <label for="card-expiry" class="mdc-floating-label mdc-floating-label--float-above" style="">Expiration</label>
-              </div>
-              <div class="mdc-notched-outline__trailing"></div>
-            </div>
-
-          </div>
-        </div>
-
-        <div class="v-column mdc-layout-grid__cell mdc-layout-grid__cell--span-2 v-padding- v-column--relative v-grid-column-align-left v-component v-container">
-          <div class="v-focusable mdc-text-field mdc-text-field--outlined" style="width: 100%;">
-            <div id="card-cvc" class="input empty v-stripe-element"></div>
-            <div class="mdc-notched-outline mdc-notched-outline--upgraded mdc-notched-outline--notched">
-              <div class="mdc-notched-outline__leading"></div>
-              <div class="mdc-notched-outline__notch">
-                <label for="card-cvc" class="mdc-floating-label mdc-floating-label--float-above" style="">CVC</label>
-              </div>
-              <div class="mdc-notched-outline__trailing"></div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
+  <% if comp.form_type == :single_line %>
+    <%= File.read(File.expand_path('_credit_card_form_single_line.html', __dir__)  ) %>
+  <% else %>
+    <%= File.read(File.expand_path('_credit_card_form_multi_line.html', __dir__)  ) %>
+  <% end %>
 </div>
