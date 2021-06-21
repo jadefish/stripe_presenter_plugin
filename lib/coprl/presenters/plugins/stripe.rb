@@ -3,7 +3,7 @@ require_relative 'stripe/components/credit_card_form'
 require_relative 'stripe/components/actions/create_stripe_bank_account_token'
 require_relative 'stripe/components/actions/tokenize_credit_card'
 
-module Voom
+module Coprl
   module Presenters
     module Plugins
       module Stripe
@@ -66,30 +66,30 @@ module Voom
         end
 
         module WebClientComponents
-          VIEW_DIR = File.join(__dir__, 'stripe/views')
+          def view_dir_stripe(_pom)
+            File.join(__dir__, '../../../..', 'views', 'components')
+          end
 
           def render_stripe_js(comp,
                              render:,
                              components:,
                              index:)
-            render.call :erb, :stripe_js, views: VIEW_DIR,
+            render.call :erb, :stripe_js, views: view_dir_stripe(comp),
                         locals: {comp: comp,
                                  components: components, index: index}
           end
 
-          def render_header_stripe(_pom, render:)
-            view_dir = File.join(__dir__, 'stripe/views')
-            render.call :erb, :header, views: view_dir
+          def render_header_stripe(pom, render:)
+            render.call :erb, :stripe_header, views: view_dir_stripe(pom)
           end
 
           def render_stripe_credit_card_form(comp,
                                              render:,
                                              components:,
                                              index:)
-            render.call :erb, :credit_card_form, views: VIEW_DIR,
+            render.call :erb, :credit_card_form, views: view_dir_stripe(comp),
                         locals: {comp: comp,
                                  components: components,
-                                 view_dir: VIEW_DIR,
                                  index: index}
           end
 

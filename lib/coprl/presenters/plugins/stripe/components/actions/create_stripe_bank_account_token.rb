@@ -1,4 +1,4 @@
-module Voom
+module Coprl
   module Presenters
     module Plugins
       module Stripe

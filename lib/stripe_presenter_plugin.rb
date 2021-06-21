@@ -1,1 +1,1 @@
-require_relative 'voom/presenters/plugins/stripe'
+require_relative 'coprl/presenters/plugins/stripe/stripe'
