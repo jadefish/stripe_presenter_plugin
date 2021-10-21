@@ -1,0 +1,14 @@
+<div id="<%= comp.id %>"
+     class="v-plugin"
+     data-stripe-publishable-key="<%= comp.stripe_publishable_key %>"
+     data-plugin-callback="PaymentRequestForm"
+     data-country="<%= comp.country %>"
+     data-currency="<%= comp.currency %>"
+     data-item-label="<%= comp.description %>"
+     data-item-total="<%= comp.total %>"
+     data-request-name="<%= comp.request_name %>"
+     data-request-email="<%= comp.request_email %>"
+     data-payment-intent-path="<%= comp.payment_intent_path %>"
+     <%= partial "components/event", locals: {comp: comp, events: comp.events, parent_id: comp.id} %>>
+  <!-- A Stripe Element will replace all inner content. -->
+</div>

@@ -1,10 +1,10 @@
 class StripeCreditCardForm {
   constructor(element) {
-    console.log('\tStripeCreditCardForm');
+    console.debug('\tStripeCreditCardForm');
     this.element = element;
     this.data = this.element.dataset;
     this.stripe = Stripe(this.data.stripePublishableKey);
-    this.formType = this.data.formType
+    this.formType = this.data.formType;
 
     const elements = this.stripe.elements();
 
@@ -47,7 +47,6 @@ class StripeCreditCardForm {
       this.cardCvc = elements.create('cardCvc', {style: style});
       this.cardCvc.mount('#card-cvc');
     }
-
   }
 
   stripeTokenData() {
