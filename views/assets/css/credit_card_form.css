@@ -1,14 +1,10 @@
-/* Single line component styles */
+/* Multi-line component styles */
 .v-stripe_credit_card_form_multi_line .v-stripe-element {
     width: 100%;
     padding: 18px;
 }
 
-/* Multi-line component styles */
-.v-stripe_credit_card_form_single_line {
-    max-width: 500px;
-}
-
+/* Single line component styles */
 .v-stripe_credit_card_form_single_line #card-errors {
     color: #DC1F3C;
 }
