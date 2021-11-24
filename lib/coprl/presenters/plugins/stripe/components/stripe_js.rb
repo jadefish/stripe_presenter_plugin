@@ -1,6 +1,6 @@
-require 'voom/presenters/dsl/components/base'
+require 'coprl/presenters/dsl/components/base'
 
-module Voom
+module Coprl
   module Presenters
     module Plugins
       module Stripe

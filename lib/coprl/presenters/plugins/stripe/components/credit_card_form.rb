@@ -1,6 +1,6 @@
-require 'voom/presenters/dsl/components/event_base'
+require 'coprl/presenters/dsl/components/event_base'
 
-module Voom
+module Coprl
   module Presenters
     module Plugins
       module Stripe
