@@ -55,10 +55,16 @@ module Coprl
             self << Stripe::Components::CreditCardForm.new(stripe_publishable_key,parent: self, **attributes, &block)
           end
 
-          def stripe_payment_request_form(stripe_publishable_key:, description:, total:, **attributes, &block)
+          def stripe_payment_request_form(stripe_publishable_key:,
+                                          items:,
+                                          total:,
+                                          client_secret_url:,
+                                          **attributes,
+                                          &block)
             self << Stripe::Components::PaymentRequestForm.new(stripe_publishable_key,
-                                                               description: description,
+                                                               items: items,
                                                                total: total,
+                                                               client_secret_url: client_secret_url,
                                                                parent: self,
                                                                **attributes,
                                                                &block)

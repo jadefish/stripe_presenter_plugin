@@ -1,11 +1,9 @@
-require 'coprl/presenters/dsl/components/event_base'
-
 module Coprl
   module Presenters
     module Plugins
       module Stripe
         module Components
-          class CreditCardForm < DSL::Components::EventBase
+          class CreditCardForm < DSL::Components::Base
 
             attr_reader :stripe_publishable_key,
                         :address_config,
