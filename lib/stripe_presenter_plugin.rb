@@ -1,1 +1,1 @@
-require_relative 'coprl/presenters/plugins/stripe/stripe'
+require_relative 'coprl/presenters/plugins/stripe'

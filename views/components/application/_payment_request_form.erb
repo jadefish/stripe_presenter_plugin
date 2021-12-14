@@ -1,0 +1,23 @@
+<%
+  # TODO: fix; this is gross. for some reason if a method is defined in a POM
+  # calling a plugin with the same method defined (here,
+  # `attr_accessor :shipping_options`), the POM method is called instead of the
+  # plugin's method.
+  shipping_options = comp.__getobj__.instance_variable_get('@shipping_options')
+%>
+<div id="<%= comp.id %>"
+     class="v-plugin"
+     data-stripe-publishable-key="<%= comp.stripe_publishable_key %>"
+     data-plugin-callback="PaymentRequestForm"
+     data-item-label="<%= comp.description %>"
+     data-item-total="<%= comp.total %>"
+     data-payment-intent-path="<%= comp.payment_intent_path %>"
+     data-country="<%= comp.options[:country] %>"
+     data-currency="<%= comp.options[:currency] %>"
+     data-request-name="<%= comp.options[:request_name] %>"
+     data-request-email="<%= comp.options[:request_email] %>"
+     data-request-shipping="<%= comp.options[:request_shipping] %>"
+     data-shipping-options="<%= h JSON.dump(shipping_options) %>"
+     <%= partial "components/event", locals: {comp: comp, events: comp.events, parent_id: comp.id} %>>
+  <!-- A Stripe Element will replace all inner content. -->
+</div>

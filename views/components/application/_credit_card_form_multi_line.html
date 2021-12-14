@@ -1,46 +1,60 @@
-<div class="sr-payment-form v-grid mdc-layout-grid v-padding-bottom0-left0-right0-top0 v-component v-container">
+<div class="sr-payment-form v-grid mdc-layout-grid v-component v-container v-padding--top0 v-padding--right0 v-padding--bottom0 v-padding--left0">
   <div class="mdc-layout-grid__inner">
-
-    <div class="v-column mdc-layout-grid__cell mdc-layout-grid__cell--span-6 v-padding- v-column--relative v-grid-column-align-left v-component v-container">
+    <div class="v-column mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-12-tablet v-column--relative v-grid-column-align-left v-component v-container">
       <div class="v-focusable mdc-text-field mdc-text-field--outlined" style="width: 100%;">
         <div id="card-number" class="input empty v-stripe-element"></div>
         <div class="mdc-notched-outline mdc-notched-outline--upgraded mdc-notched-outline--notched">
           <div class="mdc-notched-outline__leading"></div>
           <div class="mdc-notched-outline__notch">
-            <label for="card-number" class="mdc-floating-label mdc-floating-label--float-above" style="">Card Number</label>
+            <label for="card-number" class="mdc-floating-label mdc-floating-label--float-above">Card Number</label>
           </div>
           <div class="mdc-notched-outline__trailing"></div>
         </div>
-
+      </div>
+      <div class="mdc-text-field-helper-line">
+        <div class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg v-hidden"
+             role="alert"
+             aria-live="polite">
+        </div>
       </div>
     </div>
 
-    <div class="v-column mdc-layout-grid__cell mdc-layout-grid__cell--span-3 v-padding- v-column--relative v-grid-column-align-left v-component v-container">
+    <div class="v-column mdc-layout-grid__cell mdc-layout-grid__cell--span-3 mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone v-column--relative v-grid-column-align-left v-component v-container">
       <div class="v-focusable mdc-text-field mdc-text-field--outlined" style="width: 100%;">
-        <div id="card-expiry" class="input empty  v-stripe-element"></div>
+        <div id="card-expiry" class="input empty v-stripe-element"></div>
         <div class="mdc-notched-outline mdc-notched-outline--upgraded mdc-notched-outline--notched">
           <div class="mdc-notched-outline__leading"></div>
           <div class="mdc-notched-outline__notch">
-            <label for="card-expiry" class="mdc-floating-label mdc-floating-label--float-above" style="">Expiration</label>
+            <label for="card-expiry" class="mdc-floating-label mdc-floating-label--float-above">Expiration</label>
           </div>
           <div class="mdc-notched-outline__trailing"></div>
         </div>
-
+      </div>
+      <div class="mdc-text-field-helper-line">
+        <div class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg v-hidden"
+             role="alert"
+             aria-live="polite">
+        </div>
       </div>
     </div>
 
-    <div class="v-column mdc-layout-grid__cell mdc-layout-grid__cell--span-2 v-padding- v-column--relative v-grid-column-align-left v-component v-container">
+    <div class="v-column mdc-layout-grid__cell mdc-layout-grid__cell--span-3 mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone v-column--relative v-grid-column-align-left v-component v-container">
       <div class="v-focusable mdc-text-field mdc-text-field--outlined" style="width: 100%;">
         <div id="card-cvc" class="input empty v-stripe-element"></div>
         <div class="mdc-notched-outline mdc-notched-outline--upgraded mdc-notched-outline--notched">
           <div class="mdc-notched-outline__leading"></div>
           <div class="mdc-notched-outline__notch">
-            <label for="card-cvc" class="mdc-floating-label mdc-floating-label--float-above" style="">CVC</label>
+            <label for="card-cvc" class="mdc-floating-label mdc-floating-label--float-above">CVC</label>
           </div>
           <div class="mdc-notched-outline__trailing"></div>
         </div>
       </div>
+      <div class="mdc-text-field-helper-line">
+        <div class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg v-hidden"
+             role="alert"
+             aria-live="polite">
+        </div>
+      </div>
     </div>
-
   </div>
 </div>

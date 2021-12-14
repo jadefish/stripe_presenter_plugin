@@ -1,5 +1,6 @@
 require_relative 'stripe/components/stripe_js'
 require_relative 'stripe/components/credit_card_form'
+require_relative 'stripe/components/payment_request_form'
 require_relative 'stripe/components/actions/create_stripe_bank_account_token'
 require_relative 'stripe/components/actions/tokenize_credit_card'
 
@@ -53,6 +54,15 @@ module Coprl
           def stripe_credit_card_form(stripe_publishable_key:, **attributes, &block)
             self << Stripe::Components::CreditCardForm.new(stripe_publishable_key,parent: self, **attributes, &block)
           end
+
+          def stripe_payment_request_form(stripe_publishable_key:, description:, total:, **attributes, &block)
+            self << Stripe::Components::PaymentRequestForm.new(stripe_publishable_key,
+                                                               description: description,
+                                                               total: total,
+                                                               parent: self,
+                                                               **attributes,
+                                                               &block)
+          end
         end
 
         module DSLEventActions
@@ -93,6 +103,11 @@ module Coprl
                                  index: index}
           end
 
+          def render_stripe_payment_request_form(comp, render:, components:, index:)
+            render.call :erb, :payment_request_form,
+                        views: view_dir_stripe(comp),
+                        locals: {comp: comp, components: components, index: index}
+          end
         end
 
         module WebClientActions
