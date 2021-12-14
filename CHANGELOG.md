@@ -1,3 +1,15 @@
+# [1.3.0](https://github.com/evvnt/stripe_presenter_plugin/compare/v1.2.0...v1.3.0) (2021-12-14)
+
+
+### Bug Fixes
+
+* update padding for multi line payment form ([7cf0d66](https://github.com/evvnt/stripe_presenter_plugin/commit/7cf0d6630d0eefef9806b76010b3b91df5cbecc2))
+
+
+### Features
+
+* decorate MDC elements on change ([8c7b6f1](https://github.com/evvnt/stripe_presenter_plugin/commit/8c7b6f1e4b7be04bc55cdfbda0057b7607c6d6d3))
+
 # [1.2.0](https://github.com/mynorth/stripe_presenter_plugin/compare/v1.1.0...v1.2.0) (2021-11-24)
 
 
