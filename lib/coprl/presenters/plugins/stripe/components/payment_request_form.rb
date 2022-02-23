@@ -25,7 +25,13 @@ module Coprl
               @total = total
               @payment_intent_path = payment_intent_path
               @options = DEFAULT_OPTIONS.merge(attributes.slice(*DEFAULT_OPTIONS.keys))
-              @shipping_options = validate_shipping_options(shipping_options)
+              @shipping_options =
+                if @options[:request_shipping]
+                  validate_shipping_options(shipping_options)
+                else
+                  # Google Pay raises a JS error if shipping options are provided but not required.
+                  []
+                end
 
               super(type: :stripe_payment_request_form, **attributes, &block)
 

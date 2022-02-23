@@ -8,15 +8,21 @@ class PaymentRequestForm {
     this.params = {};
 
     const amount = parseInt(this.data.itemTotal, 10); // currency subunit (e.g. cents)
-    const paymentRequest = this.createPaymentRequest({
+    const paymentRequestData = {
       country: this.data.country,
       currency: this.data.currency,
       requestPayerName: this.data.requestName == 'true',
       requestPayerEmail: this.data.requestEmail == 'true',
       requestShipping: this.data.requestShipping == 'true',
-      shippingOptions: JSON.parse(this.data.shippingOptions),
       total: {label: this.data.itemLabel, amount: amount}
-    });
+    };
+
+    // Exclude shipping options when not needed:
+    if (paymentRequestData.requestShipping && this.data.shippingOptions) {
+      paymentRequestData.shippingOptions = JSON.parse(this.data.shippingOptions)
+    }
+
+    const paymentRequest = this.createPaymentRequest(paymentRequestData);
 
     paymentRequest.canMakePayment().then(result => {
       if (result) {
