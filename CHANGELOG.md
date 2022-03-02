@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/evvnt/stripe_presenter_plugin/compare/v1.3.0...v1.3.1) (2022-03-02)
+
+
+### Bug Fixes
+
+* omit shipping options when not required ([a0a3c3d](https://github.com/evvnt/stripe_presenter_plugin/commit/a0a3c3d9e1c17f8f10c6bbcf46cce397340a697f))
+
 # [1.3.0](https://github.com/evvnt/stripe_presenter_plugin/compare/v1.2.0...v1.3.0) (2021-12-14)
 
 
