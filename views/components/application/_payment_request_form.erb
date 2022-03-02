@@ -4,6 +4,7 @@
   # `attr_accessor :shipping_options`), the POM method is called instead of the
   # plugin's method.
   shipping_options = comp.__getobj__.instance_variable_get('@shipping_options')
+  have_shipping_options = shipping_options&.any?
 %>
 <div id="<%= comp.id %>"
      class="v-plugin"
@@ -17,7 +18,7 @@
      data-request-name="<%= comp.options[:request_name] %>"
      data-request-email="<%= comp.options[:request_email] %>"
      data-request-shipping="<%= comp.options[:request_shipping] %>"
-     data-shipping-options="<%= h JSON.dump(shipping_options) %>"
+     <% if have_shipping_options %>data-shipping-options="<%= h JSON.dump(shipping_options) %>"<% end %>
      <%= partial "components/event", locals: {comp: comp, events: comp.events, parent_id: comp.id} %>>
   <!-- A Stripe Element will replace all inner content. -->
 </div>
